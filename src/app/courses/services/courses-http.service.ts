@@ -17,21 +17,21 @@ export class CoursesHttpService {
     }
 
     findAllCourses(): Observable<Course[]> {
-        return this.http.get(environment.apiUrl+'/api/courses')
+        return this.http.get('/api/courses')
             .pipe(
                 map(res => res['payload'])
             );
     }
 
     findCourseByUrl(courseUrl: string): Observable<Course> {
-      return this.http.get<Course>(environment.apiUrl+`/api/courses/${courseUrl}`);
+      return this.http.get<Course>(`/api/courses/${courseUrl}`);
     }
 
     findLessons(
         courseId:number,
         pageNumber = 0, pageSize = 3):  Observable<Lesson[]> {
 
-        return this.http.get<Lesson[]>(environment.apiUrl+'/api/lessons', {
+        return this.http.get<Lesson[]>('/api/lessons', {
             params: new HttpParams()
                 .set('courseId', courseId.toString())
                 .set('sortOrder', 'asc')
@@ -42,7 +42,7 @@ export class CoursesHttpService {
 
 
     saveCourse(courseId: number | string, changes: Partial<Course>) {
-        return this.http.put(environment.apiUrl+'/api/course/' + courseId, changes);
+        return this.http.put('/api/course/' + courseId, changes);
     }
 
 
