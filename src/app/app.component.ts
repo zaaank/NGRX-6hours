@@ -6,6 +6,7 @@ import {NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Route
 import { AppState } from './reducers';
 import { isLoggedIn, isLoggedOut } from './auth/auth-selectors';
 import { login, logout } from './auth/auth.actions';
+import { User } from './auth/model/user.model';
 
 @Component({
   selector: 'app-root',
@@ -25,7 +26,8 @@ export class AppComponent implements OnInit {
       const userProfile = localStorage.getItem('user');
 
       if(userProfile){
-        this.store.dispatch(login(JSON.parse(userProfile)));
+        const userProfileParsed: User = JSON.parse(userProfile);
+        this.store.dispatch(login({user:userProfileParsed}));
       }
       this.router.events.subscribe(event  => {
         switch (true) {

@@ -11,7 +11,8 @@ export class AuthEffects {
    login$ = createEffect(()=>
      this.action$.pipe(ofType(AuthActions.login),
       tap(action =>
-      localStorage.setItem('user', JSON.stringify(action.user))
+       {
+      localStorage.setItem('user', JSON.stringify(action.user))}
     )), {dispatch: false}
 
   )
